@@ -1,0 +1,124 @@
+---------------------------------proyecto node js---------------------------------
+
+Proyecto basado en node js 
+
+
+Consta de una base de datos pequeña sobre informacion de peliculas y cines donde se emitieron,
+cuenta con un sistema de autenticacion (passport) de usuario para que solo los que esten registrados 
+puedan modificar y agregar nuevos datos, (tenia en mente crear un apartado usuario y un admin como 
+lo indica en los extras del proyecto, pero no me ha dado tiempo, asi que use el apartado user para 
+hacerlo como un usuario 'root', asi que para mirar la base de datos no hace falta registrarse)
+
+
+Falta mejorar el control de errores, ya que se ha complicado un poco este tema,
+asi que si se ejecuta mal una ruta es probable que se muestre un error generico.
+
+y me ha faltado tambien subirlo a un host.
+
+
+Estas son las rutas para utilizar el proyecto:
+
+-------------------rutas para la coleccion Movies-------------------
+
+http://localhost:3000/movies/year Esta nos muestra peliculas que se estrenaron a partir del 2010
+
+http://localhost:3000/all Nos mostrara todas las peliculas
+
+http://localhost:3000/movies/<id> Motrara las peliculas en base a su id
+
+IDs
+[
+    63867cb31317d614f9323bf5
+    63867cb31317d614f9323bf6
+    63867cb31317d614f9323bf7
+    63867cb31317d614f9323bf8
+    63867cb31317d614f9323bf9
+    63867cb31317d614f9323bfa
+]
+
+http://localhost:3000/movies/genre/<genre> Mostrara las peliculas en base a su genero
+
+Generos disponibles
+[
+    Acción
+    Animación
+    Ciencia ficción
+    Comedia romántica
+]
+
+http://localhost:3000/movies/title/<title> Mostrara peliculas buscadas por su nombre
+
+Titulos disponibles
+
+[
+    The Matrix
+    The Matrix Reloaded
+    Buscando a Nemo
+    Buscando a Dory
+    Interestelar
+    50 primeras citas
+]
+
+http://localhost:3000/movies con esta ruta podremos agregar nuevas salas de cine con el siguiente modelo:
+
+{
+        "title": "nombre de la pelicula",
+        "director": "director",
+        "year":  año,
+        "genre": "genero"
+
+ }
+
+ todo esto haciendo uso de postman en la pestaña body previamente configurado el header a content-type 
+ y el valor tipo json(value = application/json ) todo con un metodo POST
+
+ http://localhost:3000/movies/<ID> con esta ruta podremos borrar una pelicula de la coleccion de mongo 
+ haciendo uso de la id.
+
+http://localhost:3000/movies/<ID> con esta ruta podremos actualizar los datos en la coleccion sieguiendo 
+el siguiente modelo:
+
+{
+        "title": "nombre de la pelicula",
+        "director": "director",
+        "year":  año,
+        "genre": "genero"
+
+ }
+
+todo esto haciendo uso de postman en la pestaña body previamente configurado el header a content-type
+ y el valor tipo json(value = application/json ) todo con un metodo PUT.
+
+----------------estan son las rutas para la coleccion cinemas---------------
+
+http://localhost:3000/cinemas mostrara todas las salas de cine 
+
+para el siguiente paso requiere el uso de postman
+
+http://localhost:3000/cinemas con esta ruta podremos agregar nuevas salas de cine con el siguiente modelo:
+
+
+{
+    "name": "Nombre de la sala de cine",
+    "location": "La ubicacion"
+    
+}
+
+todo esto haciendo uso de postman en la pestaña body previamente configurado el header a content-type
+ y el valor tipo json(value = application/json ) todo con un metodo POST
+
+
+http://localhost:3000/addmovies con esta ruta podremos agregar peliculas a las salas de cine que 
+hemos creado previamente, usando el siguiente modelo:
+
+{
+    "movieId": "la id de la pelicula que quieres agregar",
+    "locationId": "la id de la sala de cine creada" 
+}
+
+con el uso de postman en la pestaña body previamente configurado el header a content-type
+ y el valor tipo json(value = application/json ) todo con un metodo PUT
+
+
+http://localhost:3000/<ID> con esta ruta podremos borrar una sala de cine de la coleccion
+ de mongo haciendo uso de la id.
