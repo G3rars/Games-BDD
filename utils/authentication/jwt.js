@@ -4,7 +4,6 @@ const SECRET_PASSWORD_JWT = process.env.SECRET_PASSWORD_JWT || 'miCodigoSecreto'
 
 // crear un token
 function generateToken (data) {
-  console.log(data);
   const payload = JSON.parse(JSON.stringify(data))
 
   const token = jwt.sign(

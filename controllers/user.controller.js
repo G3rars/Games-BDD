@@ -1,5 +1,36 @@
 const { userService } = require('../services/user.service.js')
 
+// async function checkUserHassession (req, res, next) {
+//   try {
+//     const token = desencryptToken()
+//     if (token === true){
+      // tiene token dejar pasar o prhibir ruta
+//     } else {
+      // redirigir a login
+//     }
+//     req.locals.token = token
+//     next()
+//   } catch (error) {
+//     res.status(400).json({ message: error.message })
+//   }
+// }
+
+// async function isAdmin (req, res, next) {
+//   try {
+//     const token = req.locals.token
+//     if (user === 'usuario') {
+      // prohibir ruta
+//       req.json({ no_access:'nope' })
+//     }
+//     else {
+      // dejar actualizar o crear producto
+//       next()
+//     }
+//   } catch (error) {
+//     res.status(400).json({ message: error.message })
+//   }
+// }
+
 async function handleRegister (req, res, next) {
   try {
     const user = await userService.register(req.body)
@@ -20,13 +51,11 @@ async function handleLogin (req, res, next) {
 
 async function handleLogout (req, res, next) {
   try {
-    const user = await userService.logout(req.body)
+    await userService.logout(req.body.token)
     res.status(200).json('Has cerrado sesión')
   } catch (error) {
     res.status(400).json({ message: error.message })
   }
-  
-
 }
 
 module.exports = {

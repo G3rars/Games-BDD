@@ -7,13 +7,11 @@ class User {
     email
     password
     role
-    token
-    constructor({ email, password, role = ROLES.USER , token = null})
+    constructor({ email, password, role = ROLES.USER})
     {
         this.email = email
         this.password = password
         this.role = role
-        this.token = token
     }
 
     DTO () {
