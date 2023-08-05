@@ -5,14 +5,16 @@ class Game {
     year
     genre
     description
+    stock
     images
-    constructor({name, platforms, price, year, genre, description, images = []}){
+    constructor({name, platforms, price, year, genre, description, stock, images = []}){
         this.name = name
         this.platforms = platforms
         this.price = price
         this.year = year
         this.genre = genre
         this.description = description
+        this.stock = stock
         this.images = images
 
     }
@@ -25,6 +27,7 @@ class Game {
             year: this.year,
             genre: this.genre,
             description: this.description,
+            stock: this.stock,
             images: this.images
         }
     }

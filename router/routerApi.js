@@ -3,11 +3,11 @@ const express = require('express');
 const userRouter = require('./routes/user.routes.js');
 const gamesRouter = require('./routes/games.routes.js');
 // const storesRouter = require('./routes/stores.routes.js');
-// const favoritesRouter = require('./routes/favorite.routes.js')
+const cartRouter = require('./routes/cart.routes.js')
 
 const apiRouter = express.Router()
 apiRouter.use('/user', userRouter)
-// apiRouter.use('/favorites', favoritesRouter)
+apiRouter.use('/cart', cartRouter)
 // apiRouter.use('/stores', storesRouter);
 apiRouter.use('/', gamesRouter);
 apiRouter.use('*', (req, res, next) => {

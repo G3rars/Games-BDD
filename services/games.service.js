@@ -32,13 +32,14 @@ class GameService {
         const images = await Promise.all(uploadPromises);
         const urls = images.map(value => value.secure_url)
         newGame.images = urls
+        console.log(newGame);
         await Games.create(newGame)
         imagePaths.forEach((path) => {
           fs.unlinkSync(path);
         });
         
       } catch (error) {
-        throw new Error('Fallo al cargar el juego nuevo')
+        throw new Error(`Fallo al cargar el juego: -> ${error.message}`);
       }
     }
     

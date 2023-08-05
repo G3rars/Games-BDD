@@ -7,18 +7,21 @@ class User {
     email
     password
     role
-    constructor({ email, password, role = ROLES.USER})
+    cart
+    constructor({ email, password, role = ROLES.USER, cart = []})
     {
         this.email = email
         this.password = password
         this.role = role
+        this.cart = cart
     }
 
     DTO () {
         return {
             email: this.email,
             password: this.password,
-            role: this.role
+            role: this.role,
+            cart: this.cart
         }
     }
 }
