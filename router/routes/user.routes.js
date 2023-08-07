@@ -22,7 +22,7 @@ userRouter
 
 userRouter
     .route('/logout')
-    .post(checkUserHassession, handleLogout);
+    .post(handleLogout);
 
 userRouter
     .route('/profile')

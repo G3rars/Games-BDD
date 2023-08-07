@@ -11,8 +11,8 @@ async function getGames (req, res, next) {
 
 async function createGame (req, res, next) {
     try {
-        await gameService.post(req)
-        res.status(201).json('Se ha creado el juego')
+        const game = await gameService.post(JSON.parse(req.body.gamesData), req.files)
+        res.status(201).json(game)
     } catch (error) {
         res.status(400).json({ message: error.message })
     }
@@ -29,8 +29,9 @@ async function getOneGame (req, res, next) {
 async function updateGame (req, res, next) {
     try {
         const id = req.params.id
-        const updates = req.body
-        const game = await gameService.put(id, updates)
+        const updates = JSON.parse(req.body.gamesData)
+        console.log(updates);
+        const game = await gameService.put(id, updates, req.files)
         res.status(200).json('Se ha actualizado el juego')
     } catch (error) {
         res.status(400).json({ message: error.message })

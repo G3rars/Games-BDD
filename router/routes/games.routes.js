@@ -24,6 +24,6 @@ gamesRouter
 gamesRouter
     .route('/games/:id')
     .get(getOneGame)
-    .put(checkUserHassession,isAdmin,updateGame)
+    .put(checkUserHassession,isAdmin,upload.array('images', 4),updateGame)
     .delete(checkUserHassession,isAdmin,deleteGame)
 module.exports = gamesRouter;

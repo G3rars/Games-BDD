@@ -1,7 +1,6 @@
 const Games = require('../schemas/games.model')
 const GameModel = require('../models/game.model');
-const cloudinary = require('cloudinary').v2;
-const fs = require('fs');
+const { imageService } = require('./image.service');
 
 class GameService {
    async get () {
@@ -23,29 +22,27 @@ class GameService {
       }
     }
     
-    async post(req) {
+    async post(game, files) {
       try { 
-        const newGame = new GameModel({ ...req.body })
-        const imageFile = req.files
-        const imagePaths = imageFile.map((image) => image.path); 
-        const uploadPromises = imagePaths.map((value) => cloudinary.uploader.upload(value));
-        const images = await Promise.all(uploadPromises);
-        const urls = images.map(value => value.secure_url)
-        newGame.images = urls
-        console.log(newGame);
-        await Games.create(newGame)
-        imagePaths.forEach((path) => {
-          fs.unlinkSync(path);
-        });
-        
+        const newGame = new GameModel({ ...game })
+        if (files && files.length > 0) {
+          const urls = await imageService.saveImage(files);
+          newGame.images = urls;
+        }
+        const createGame = await Games.create(newGame.DTO())
+        return createGame
       } catch (error) {
         throw new Error(`Fallo al cargar el juego: -> ${error.message}`);
       }
     }
     
-    async put (id, updates) {
+    async put (id, updates, files) {
       try {
-        await Games.findOneAndUpdate({ _id: id }, updates)
+        if (files && files.length > 0) {
+          const urls = await imageService.saveImage(files);
+          updates.images = urls
+        }
+        await Games.findByIdAndUpdate({ _id: id }, updates)
       } catch (error) {
         throw new Error('Fallo al actualizar los productos')
       }
@@ -54,7 +51,7 @@ class GameService {
     async delete (id) {
       try {
         const game = await Games.findOne({ _id: id })
-        if (game === null) throw new Error('Fallo al borrar el juego')
+        if (game === null) throw new Error(`Fallo al borrar el juego -> ${error.message}`)
         await game.delete({ _id: game._id })
       } catch (error) {
         throw new Error(error.message)

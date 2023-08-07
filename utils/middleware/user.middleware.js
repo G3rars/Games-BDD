@@ -2,7 +2,7 @@ const { desencryptToken } = require("../authentication/jwt")
 
 async function checkUserHassession (req, res, next) {
       try {
-        const token = desencryptToken(req.body.token)
+        const token = await desencryptToken(req.headers.authorization)
         if(!token) throw new Error('Token invalido')
         res.locals.token = token
         next()
