@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 // Utils
 const connect = require('./utils/db/connect.js');
+const cloudinary = require('./utils/db/cloudinary.js');
 
 // Routers
 const apiRouter = require('./router/routerApi.js')
