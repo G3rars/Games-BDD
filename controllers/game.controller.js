@@ -30,7 +30,6 @@ async function updateGame (req, res, next) {
     try {
         const id = req.params.id
         const updates = JSON.parse(req.body.gamesData)
-        console.log(updates);
         const game = await gameService.put(id, updates, req.files)
         res.status(200).json('Se ha actualizado el juego')
     } catch (error) {
