@@ -9,9 +9,13 @@ const apiRouter = express.Router()
 apiRouter.use('/user', userRouter)
 apiRouter.use('/cart', cartRouter)
 // apiRouter.use('/stores', storesRouter);
-apiRouter.use('/', gamesRouter);
+apiRouter.use('/api', gamesRouter);
+apiRouter.use('/', (req, res, next) => {
+    res.status(200).send('Bienvenido')
+    next(error);
+})
 apiRouter.use('*', (req, res, next) => {
-    res.status(404).json('La ruta no existe')
+    res.status(404).send('La ruta no existe')
     next(error);
 })
 
