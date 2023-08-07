@@ -12,7 +12,7 @@ connect();
 
 const server = express();
 
-const allowedOrigins = ['http://localhost:4200', 'http://localhost:3000'];
+const allowedOrigins = ['http://localhost:4200', 'http://localhost:3000', 'https://games-store-bdd.vercel.app/'];
 
 server.use(cors({
   origin: function (origin, callback) {
