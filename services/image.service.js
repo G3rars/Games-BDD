@@ -8,7 +8,7 @@ class ImageService {
             const imagePaths = await files.map((image) => image.path); 
             const uploadPromises = await imagePaths.map((value) => cloudinary.uploader.upload(value));
             const images = await Promise.all(uploadPromises);
-            imagePaths.forEach((path) => {
+            await imagePaths.forEach((path) => {
                 fs.unlinkSync(path);
               });
             return images.map(value => value.secure_url)
